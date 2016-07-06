@@ -1,0 +1,86 @@
+﻿@model RestaurantBooking.Models.DinnerBookingViewModel
+
+@{
+    ViewBag.Title = "RestaurantBooking";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    function IsValidTimes() {
+        var startTime = $('#BookingTime').prop('value');
+
+        var valid = (startTime.search(/^\d{2}:\d{2}$/) != -1) &&
+            (startTime.substr(0, 2) >= 0 && startTime.substr(0, 2) <= 24) &&
+            (startTime.substr(3, 2) >= 0 && startTime.substr(3, 2) <= 59);
+        
+        if ($('div.validation-summary-errors ul').children().length > 0 && !valid) {
+            $('div.validation-summary-errors ul').append("<li>Time should be in the right format");
+        }
+        else if (!valid) {
+            $('div#errors').append("<ul><li style='color:red;'>Time should be in the right format</li></li>")
+        }
+        return valid;
+    }
+    
+    $(document).ready(function () {
+        $.validator.unobtrusive.parse($('form#RestaurantBooking'));
+        debugger;
+        $("#BookingDate").datepicker({ dateFormat: "dd/mm/yy" });
+
+        $('#Submit').click(function() {
+            $('form#RestaurantBooking').validate();
+            var mvcValidation = $('form#RestaurantBooking').valid();
+
+            return mvcValidation && IsValidTimes();
+        });
+    });
+</script>
+<h2>Restaurant Booking</h2>
+
+<div class="content-wrapper">
+    <div id="submenu-container">
+        <ul id="submenu">
+            <li><a href="/Home/RestaurantBooking">Book Seating</a></li>
+            <li><a href="/Home/MarkAttendance">Mark Schedule</a></li>
+        </ul>
+        </div>
+    <br/>
+    @using (Html.BeginForm("RestaurantBooking","Home",FormMethod.Post,new {@id="RestaurantBooking"}))
+    {
+        <div id="errors">
+            @Html.ValidationSummary()
+        </div>
+        <div>
+            @Html.LabelFor(p => p.FirstName, new {@class = "labels"})
+            @Html.TextBoxFor(p => p.FirstName, new {@class = "textboxes"})
+        </div>
+        <div>
+            @Html.LabelFor(p => p.LastName, new {@class = "labels"})
+            @Html.TextBoxFor(p => p.LastName, new {@class = "textboxes"})
+        </div>
+        <div>
+            @Html.LabelFor(p => p.Phone, new {@class = "labels"})
+            @Html.TextBoxFor(p => p.Phone, new {@class = "textboxes"})
+        </div>
+        <div>
+            @Html.LabelFor(p => p.Email, new {@class = "labels"})
+            @Html.TextBoxFor(p => p.Email, new {@class = "textboxes"})
+        </div>
+        <div>
+            @Html.LabelFor(p => p.NumberOfSittings, new {@class = "labels"})
+            @Html.TextBoxFor(p => p.NumberOfSittings, new {@class = "textboxes"})
+        </div>
+        <div>
+            @Html.LabelFor(p => p.BookingDate, new {@class = "labels"})
+            @Html.TextBoxFor(p => p.BookingDate, new {@class = "textboxes", @id = "BookingDate"}) <br/>format is dd/mm/yyyy
+        </div>
+        <div>
+            @Html.LabelFor(p => p.BookingTime, new {@class = "labels", @id = "Bookingtime"}) 
+            @Html.TextBoxFor(p => p.BookingTime, new {@class = "textboxes"}) <br/>format is hh:mm
+            
+        </div>
+        <br/>
+        <div>
+            <input type="submit" id="Submit" value="Submit"/>
+        </div>
+    }
+</div>

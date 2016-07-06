@@ -1,0 +1,9 @@
+C:\C#Projects\RestaurantBooking\UnitOfWorkAdapter\bin\Debug\UnitOfWorkAdapter.dll
+C:\C#Projects\RestaurantBooking\UnitOfWorkAdapter\bin\Debug\UnitOfWorkAdapter.pdb
+C:\C#Projects\RestaurantBooking\UnitOfWorkAdapter\bin\Debug\DataAccess.dll
+C:\C#Projects\RestaurantBooking\UnitOfWorkAdapter\bin\Debug\EntityFramework.dll
+C:\C#Projects\RestaurantBooking\UnitOfWorkAdapter\bin\Debug\DataAccess.pdb
+C:\C#Projects\RestaurantBooking\UnitOfWorkAdapter\bin\Debug\EntityFramework.xml
+C:\C#Projects\RestaurantBooking\UnitOfWorkAdapter\obj\Debug\UnitOfWorkAdapter.csprojResolveAssemblyReference.cache
+C:\C#Projects\RestaurantBooking\UnitOfWorkAdapter\obj\Debug\UnitOfWorkAdapter.dll
+C:\C#Projects\RestaurantBooking\UnitOfWorkAdapter\obj\Debug\UnitOfWorkAdapter.pdb

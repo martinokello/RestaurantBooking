@@ -1,0 +1,54 @@
+﻿@model IEnumerable<DataAccess.Entities.Customer>
+
+@{
+    ViewBag.Title = "StoredProcedureSelect";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Stored Procedure Select</h2>
+@using (Html.BeginForm())
+{
+    <p><label>Customer Name Search</label><br/>
+        @Html.TextBox("customerName")
+    </p>
+    <p><input type="submit" value="Get Customer"/></p>
+    <table>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th></th>
+        </tr>
+
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                </tr>
+            }
+        }
+
+    </table>
+}

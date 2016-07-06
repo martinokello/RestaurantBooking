@@ -1,0 +1,63 @@
+﻿@using System.Collections
+@using DataAccess.TransferObjects
+@{
+    ViewBag.Title = "MarkAttendance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var index = 0;
+}
+<style type="text/css">
+    tr td{ padding: 5px;}
+    tr th{ padding: 5px;}
+</style>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.dropdownList').change(function() {
+            var value = $(this).parents('tr').children('td:nth-child(1)').html();
+            var boolValue = $(this).val();
+            var isSeated = (boolValue == 0 ? 'Seated' : 'NotSeated');
+            debugger;
+            var actualUrl = '/Home/MarkAsSeated';
+            var actualData = { customerId: value, isSeated: isSeated };
+            $.ajax({
+                url: actualUrl,
+                type: 'POST',
+                data: JSON.stringify(actualData),
+                contentType: 'application/json',
+                async: false,
+                success:function(data) {
+                    debugger;
+                },
+                error: function (data) {
+                debugger;
+            }
+            });
+        });
+    });
+</script>
+
+<h2>Mark Attendance</h2>
+<div class="header">
+</div>
+    <div id="submenu-container">
+        <ul id="submenu">
+            <li><a href="/Home/RestaurantBooking">Book Seating</a></li>
+            <li><a href="/Home/MarkAttendance">Mark Schedule</a></li>
+        </ul>
+        </div>
+    <br/>
+<table>
+    <tr><th>Customer ID</th><th>First Name</th><th>Last Name</th><th>Attendance</th></tr>
+@foreach (var attendance in (ViewBag.AllAttendance as IEnumerable<AttendanceTO>))
+{
+    <tr>
+        <td>@attendance.CustomerID</td>
+        <td>@attendance.FirstName</td>
+        <td>@attendance.LastName</td>
+        <td>@Html.DropDownList("IsSeated" + index, ((List<List<SelectListItem>>)ViewBag.Attendance)[index], new { @class = "dropdownList" })</td>
+    </tr>
+    
+    index++;
+}
+
+</table>
